@@ -1,4 +1,5 @@
 using Exam1_API.Dtos.Course;
+using Exam1_API.Dtos.Student;
 using Exam1_API.Models;
 
 namespace Exam1_API.Mappers
@@ -15,6 +16,8 @@ namespace Exam1_API.Mappers
                 ImageUrl = courseItem.ImageUrl,
                 Schedule = courseItem.Schedule,
                 Professor = courseItem.Professor,
+                Students =
+                    courseItem.Students?.Select(s => s.ToDto()).ToList() ?? new List<StudentDto>(),
             };
         }
 

@@ -1,3 +1,5 @@
+using Exam1_API.Dtos.Student;
+
 namespace Exam1_API.Dtos.Course
 {
     public class CourseDto
@@ -8,5 +10,6 @@ namespace Exam1_API.Dtos.Course
         public string ImageUrl { get; set; }
         public string Schedule { get; set; }
         public string Professor { get; set; }
+        public List<StudentDto> Students { get; set; }
     }
 }

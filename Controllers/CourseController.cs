@@ -34,20 +34,28 @@ namespace Exam1_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var courses = await _context.Course.ToListAsync();
-            var coursesDto = courses.Select(courses => courses.ToDto());
+            var courses = await _context.Course.Include(c => c.Students).ToListAsync();
+
+            var coursesDto = courses.Select(c => c.ToDto()).ToList();
             return Ok(coursesDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> getById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var _course = await _context.Course.FirstOrDefaultAsync(u => u.Id == id);
-            if (_course == null)
+            var courseModel = await _context
+                .Course.Include(c => c.Students)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (courseModel == null)
             {
                 return NotFound();
             }
-            return Ok(_course.ToDto());
+
+            var courseDto = courseModel.ToDto();
+            courseDto.Students = courseModel.Students.Select(s => s.ToDto()).ToList();
+
+            return Ok(courseDto);
         }
 
         [HttpPost]
@@ -73,7 +81,7 @@ namespace Exam1_API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
-                nameof(getById),
+                nameof(GetById),
                 new { id = courseModel.Id },
                 courseModel.ToDto()
             );
