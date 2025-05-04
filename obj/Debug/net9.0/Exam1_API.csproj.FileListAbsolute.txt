@@ -166,3 +166,4 @@ C:\Users\USUARIO\OneDrive\Documentos\GitHub\Exam1_API\bin\Debug\net9.0\runtimes\
 C:\Users\USUARIO\OneDrive\Documentos\GitHub\Exam1_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\USUARIO\OneDrive\Documentos\GitHub\Exam1_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\USUARIO\OneDrive\Documentos\GitHub\Exam1_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\USUARIO\OneDrive\Documentos\GitHub\Exam1_API\obj\Debug\net9.0\Exam1_API.sourcelink.json
