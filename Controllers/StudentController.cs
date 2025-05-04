@@ -24,7 +24,7 @@ namespace Exam1_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var students = await _contex.Students.ToListAsync();
+            var students = await _contex.Student.ToListAsync();
             var studentsDto = students.Select(students => students.ToDto());
             return Ok(studentsDto);
         }
@@ -32,7 +32,7 @@ namespace Exam1_API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getById([FromRoute] int id)
         {
-            var _student = await _contex.Students.FirstOrDefaultAsync(x => x.Id == id);
+            var _student = await _contex.Student.FirstOrDefaultAsync(x => x.Id == id);
             if (_student == null)
             {
                 return NotFound("Student not found");
@@ -48,7 +48,7 @@ namespace Exam1_API.Controllers
             }
             var studentModel = studentDto.ToStudentFromCreateDto();
 
-            await _contex.Students.AddAsync(studentModel);
+            await _contex.Student.AddAsync(studentModel);
             await _contex.SaveChangesAsync();
 
             return CreatedAtAction(nameof(getById), new { id = studentModel.Id }, studentModel.ToDto());
