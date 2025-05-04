@@ -13,5 +13,7 @@ namespace Exam1_API.Models
         public required string Schedule { get; set; }
         public required string Professor { get; set; }
         public string? ImageUrl { get; set; }
+        
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }

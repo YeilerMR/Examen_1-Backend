@@ -10,6 +10,6 @@ namespace Exam1_API.Dtos.Student{
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        //public int CourseId { get; set; } // Assuming you want to include the CourseId as well
+        public int CourseId { get; set; } // Assuming you want to include the CourseId as well
     }
 }

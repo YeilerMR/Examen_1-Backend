@@ -11,7 +11,7 @@ namespace Exam1_API.Mappers
                 Name = studentItem.Name,
                 Email = studentItem.Email,
                 Phone = studentItem.Phone,
-                //CourseId = studentItem.CourseId // Assuming you want to include the CourseId as well
+                CourseId = studentItem.CourseId.ToString() // Assuming you want to include the CourseId as well
             };
         }
 
@@ -20,7 +20,7 @@ namespace Exam1_API.Mappers
                 Name = createUserReques.Name,
                 Email = createUserReques.Email,
                 Phone = createUserReques.Phone,
-                //CourseId = createUserReques.CourseId // Assuming you want to include the CourseId as well
+                CourseId = createUserReques.CourseId // Assuming you want to include the CourseId as well
             };
         }
 
