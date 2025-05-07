@@ -34,4 +34,14 @@ app.UseHttpsRedirection();
 // Map Controllers
 app.MapControllers();
 
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), "UploadedImages")
+        ),
+        RequestPath = "/uploads",
+    }
+);
+
 app.Run();
