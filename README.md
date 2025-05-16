@@ -72,7 +72,7 @@ EXAM1_API/
 ├── Controllers/            # API Endpoints
 ├── Data/                   # Database context and configuration
 ├── Dtos/                   # Data Transfer Objects
-├── Helpers/                # Utility classes and methods
+├── Helpers/                # Utility classes and methods (FirebaseHelper)
 ├── Mappers/                # AutoMapper profiles or manual mappings
 ├── Migrations/             # Entity Framework migrations
 ├── Models/                 # Entities (e.g., Course, Student)
