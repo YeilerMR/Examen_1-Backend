@@ -1,11 +1,18 @@
+using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using DotNetEnv;
 using Google.Apis.Auth.OAuth2;
 
 public static class FirebaseHelper
 {
     private static readonly HttpClient client = new HttpClient();
+
+    static FirebaseHelper()
+    {
+        Env.Load();
+    }
 
     public static async Task SendPushNotificationToTopicAsync(
         string topic,
@@ -23,11 +30,7 @@ public static class FirebaseHelper
 
         var message = new
         {
-            message = new
-            {
-                topic = topic, // Sending to the topic
-                notification = new { title = title, body = body },
-            },
+            message = new { topic = topic, notification = new { title = title, body = body } },
         };
 
         var json = JsonSerializer.Serialize(message);
@@ -46,14 +49,17 @@ public static class FirebaseHelper
 
     private static async Task<string> GetAccessTokenAsync()
     {
-        // Synchronously load the credentials
-        GoogleCredential credential = GoogleCredential
-            .FromFile("firebase-adminsdk.json")
-            .CreateScoped("https://www.googleapis.com/auth/firebase.messaging");
+        var base64 = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIAL_B64");
+        var json = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
 
-        // Now you can await on the async method to get the access token
-        var accessToken = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
+        GoogleCredential credential;
+        using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+        {
+            credential = GoogleCredential
+                .FromStream(stream)
+                .CreateScoped("https://www.googleapis.com/auth/firebase.messaging");
+        }
 
-        return accessToken;
+        return await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
     }
 }
